@@ -62,12 +62,12 @@
                         </div>
                         <div class="input-group">
                             <label><i class="fas fa-calendar"></i> Age</label>
-                            <input type="number" id="age" placeholder="21-60" required>
+                            <input type="number" id="age" placeholder="21-60" min="21" max="60" required>
                         </div>
                     </div>
                     <div class="input-group">
                         <label><i class="fas fa-chart-line"></i> Credit Score</label>
-                        <input type="number" id="credit_score" placeholder="Min 300 - Max 900" required>
+                        <input type="number" id="credit_score" placeholder="Min 300 - Max 900" min="300" max="900" required>
                     </div>
                     <button type="button" class="btn-primary" onclick="nextStep(2)">Continue to Loan Details <i class="fas fa-arrow-right"></i></button>
                 </div>
@@ -84,7 +84,7 @@
 
                     <div class="input-group">
                         <label>Requested Amount (₹)</label>
-                        <input type="number" id="loan_amount" placeholder="e.g. 500000">
+                        <input type="number" id="loan_amount" placeholder="e.g. 500000" min="10000" required>
                     </div>
 
                     <div id="secured_fields" class="dynamic-fields">
@@ -98,11 +98,11 @@
                         <div class="input-grid">
                             <div class="input-group">
                                 <label>Tenure (Years)</label>
-                                <input type="number" id="tenure" value="5">
+                                <input type="number" id="tenure" value="5" min="1" max="30" required>
                             </div>
                             <div class="input-group">
                                 <label>Interest Rate (%)</label>
-                                <input type="number" step="0.1" id="interest_rate" value="10.5">
+                                <input type="number" step="0.1" id="interest_rate" value="10.5" min="1" max="30" required>
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                         </div>
                         <div class="input-group">
                             <label>Existing EMIs (₹)</label>
-                            <input type="number" id="existing_emi" value="0">
+                            <input type="number" id="existing_emi" value="0" min="0" required>
                         </div>
                     </div>
 
