@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART LOAN APPROVAL SYSTEM </title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-shield-halved"></i> ELITE <span>FINANCE</span></a>
+            <div class="nav-links">
+                <a href="#">Personal</a>
+                <a href="#">Business</a>
+                <a href="#">Wealth</a>
+                <button class="btn-login">Client Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Intelligence-Powered <br><span>Loan Approval.</span></h1>
+            <p>Get instant eligibility results with our proprietary risk assessment engine. Secure, fast, and transparent.</p>
+            <div class="trust-badges">
+                <span><i class="fas fa-check-circle"></i> ISO Certified</span>
+                <span><i class="fas fa-lock"></i> 256-bit Encrypted</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-container">
+        <!-- The Wizard Card -->
+        <div class="wizard-card">
+            <div class="card-header">
+                <h2>Eligibility Portal</h2>
+                <p>Complete the steps below to see your personalized offer.</p>
+            </div>
+
+            <!-- Progress Tracker -->
+            <div class="stepper">
+                <div class="step active" id="s1">1<span>Identity</span></div>
+                <div class="step" id="s2">2<span>Loan</span></div>
+                <div class="step" id="s3">3<span>Finance</span></div>
+            </div>
+
+            <form id="loanForm">
+                <!-- STEP 1 -->
+                <div class="form-step active" id="step-1">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="name" placeholder="Enter full name" required>
+                        </div>
+                        <div class="input-group">
+                            <label><i class="fas fa-calendar"></i> Age</label>
+                            <input type="number" id="age" placeholder="21-60" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label><i class="fas fa-chart-line"></i> Credit Score</label>
+                        <input type="number" id="credit_score" placeholder="Min 300 - Max 900" required>
+                    </div>
+                    <button type="button" class="btn-primary" onclick="nextStep(2)">Continue to Loan Details <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="form-step" id="step-2">
+                    <div class="input-group">
+                        <label>Loan Type</label>
+                        <select id="is_secured" onchange="toggleSecuredFields()">
+                            <option value="N">Unsecured (Personal/Education)</option>
+                            <option value="Y">Secured (Home/Gold/Car)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Requested Amount (₹)</label>
+                        <input type="number" id="loan_amount" placeholder="e.g. 500000">
+                    </div>
+
+                    <div id="secured_fields" class="dynamic-fields">
+                        <div class="input-group">
+                            <label>Collateral Market Value (₹)</label>
+                            <input type="number" id="collateral_value" placeholder="Total value of asset">
+                        </div>
+                    </div>
+
+                    <div id="unsecured_fields">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label>Tenure (Years)</label>
+                                <input type="number" id="tenure" value="5">
+                            </div>
+                            <div class="input-group">
+                                <label>Interest Rate (%)</label>
+                                <input type="number" step="0.1" id="interest_rate" value="10.5">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button type="button" class="btn-ghost" onclick="nextStep(1)">Back</button>
+                        <button type="button" class="btn-primary" onclick="nextStep(3)">Financial Check <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="form-step" id="step-3">
+                    <div class="input-group">
+                        <label>Employment Status</label>
+                        <select id="employment" onchange="toggleEmploymentFields()">
+                            <option value="1">Salaried Professional</option>
+                            <option value="2">Self-Employed / Business</option>
+                            <option value="3">Government Employee</option>
+                            <option value="4">Unemployed</option>
+                        </select>
+                    </div>
+
+                    <div id="surety_field" class="dynamic-fields">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="has_surety_cb">
+                            <span class="checkmark"></span>
+                            I have a Guarantor / Surety available
+                        </label>
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label>Monthly Salary (₹)</label>
+                            <input type="number" id="salary" placeholder="Monthly Take-home">
+                        </div>
+                        <div class="input-group">
+                            <label>Existing EMIs (₹)</label>
+                            <input type="number" id="existing_emi" value="0">
+                        </div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button type="button" class="btn-ghost" onclick="nextStep(2)">Back</button>
+                        <button type="button" class="btn-submit" onclick="submitForm()">Run Final Assessment</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="loader" class="loader-overlay" style="display:none;">
+                <div class="spinner"></div>
+                <p>Consulting our Risk Engine...</p>
+            </div>
+
+            <div id="result" class="result-card" style="display:none;">
+                <div id="result-content"></div>
+                <button class="btn-retry" onclick="location.reload()">New Application</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Elite Finance Corp. All rights reserved. Member FDIC.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
