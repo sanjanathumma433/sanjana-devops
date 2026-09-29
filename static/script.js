@@ -112,3 +112,25 @@ function calculateEMI() {
 document.getElementById('loan_amount').addEventListener('input', calculateEMI);
 document.getElementById('interest_rate').addEventListener('input', calculateEMI);
 document.getElementById('tenure').addEventListener('input', calculateEMI);
+function updateCreditStatus() {
+    const score = parseInt(document.getElementById('credit_score').value);
+    const status = document.getElementById('credit_status');
+
+    if (!score) {
+        status.textContent = '';
+        return;
+    }
+
+    if (score < 550) {
+        status.textContent = 'Poor Credit Score';
+    } else if (score < 650) {
+        status.textContent = 'Fair Credit Score';
+    } else if (score < 750) {
+        status.textContent = 'Good Credit Score';
+    } else {
+        status.textContent = 'Excellent Credit Score';
+    }
+}
+
+document.getElementById('credit_score')
+    .addEventListener('input', updateCreditStatus);
