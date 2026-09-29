@@ -13,12 +13,12 @@ def check_eligibility():
         data = request.json
         
         # 1. AGE CHECK
-        age = int(data.get('age', 0))
-        if not (21 <= age <= 60):
-            return jsonify({
-                "status": "rejected",
-                "reason": "Age must be between 21 and 60 years."
-            })
+       if not (21 <= age <= 60):
+    return jsonify({
+        "status": "rejected",
+        "reason": "Age must be between 21 and 60 years.",
+        "suggestion": "Please enter an age within the eligible range."
+    })
 
         is_secured = data.get('is_secured') == 'Y'
         credit_score = int(data.get('credit_score', 0))
