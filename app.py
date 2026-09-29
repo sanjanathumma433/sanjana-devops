@@ -66,7 +66,9 @@ def check_eligibility():
                 # If no surety, proceed to salary check (logic requirement)
 
             # 4. SALARY CHECK
-            salary = float(data.get('salary', 0))
+           # 4. SALARY CHECK
+# Minimum salary requirement for unsecured loans
+salary = float(data.get('salary', 0))
             if salary < 25000:
                 return jsonify({"status": "rejected", "reason": "Minimum monthly salary must be ₹25,000."})
 
