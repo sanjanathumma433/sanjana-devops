@@ -125,3 +125,28 @@ input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px
     .input-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2.2rem; }
 }
+.emi-preview {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    border: 1px solid #dbe3ec;
+}
+
+.emi-preview i {
+    font-size: 24px;
+}
+
+.emi-preview strong {
+    display: block;
+    font-size: 14px;
+}
+
+.emi-preview p {
+    margin: 5px 0 0;
+    font-size: 22px;
+    font-weight: 800;
+}
