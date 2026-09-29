@@ -87,3 +87,28 @@ async function submitForm() {
         location.reload();
     }
 }
+function calculateEMI() {
+    const loanAmount = parseFloat(document.getElementById('loan_amount').value) || 0;
+    const interestRate = parseFloat(document.getElementById('interest_rate').value) || 0;
+    const tenure = parseFloat(document.getElementById('tenure').value) || 0;
+
+    const emiDisplay = document.getElementById('emi_amount');
+
+    if (loanAmount <= 0 || interestRate <= 0 || tenure <= 0) {
+        emiDisplay.textContent = '₹0';
+        return;
+    }
+
+    const monthlyRate = interestRate / 12 / 100;
+    const numberOfMonths = tenure * 12;
+
+    const emi = (loanAmount * monthlyRate *
+        Math.pow(1 + monthlyRate, numberOfMonths)) /
+        (Math.pow(1 + monthlyRate, numberOfMonths) - 1);
+
+    emiDisplay.textContent = '₹' + Math.round(emi).toLocaleString('en-IN');
+}
+
+document.getElementById('loan_amount').addEventListener('input', calculateEMI);
+document.getElementById('interest_rate').addEventListener('input', calculateEMI);
+document.getElementById('tenure').addEventListener('input', calculateEMI);
