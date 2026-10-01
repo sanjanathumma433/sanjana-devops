@@ -62,8 +62,11 @@ def check_eligibility():
                     if credit_score >= 700:
                         return jsonify({"status": "approved", "message": "Loan Approved via Surety & Credit Score!"})
                     else:
-                        return jsonify({"status": "rejected", "reason": "Credit score below 700 (required for surety-based approval)."})
-                # If no surety, proceed to salary check (logic requirement)
+    return jsonify({
+        "status": "rejected",
+        "reason": "Credit score must be 700 or higher for unsecured loans.",
+        "suggestion": "Please improve your credit score and try again."
+    })
 
             # 4. SALARY CHECK
             salary = float(data.get('salary', 0))
